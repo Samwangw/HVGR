@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<style>
+		body {
+			width: 1300px;
+			margin: 100px auto;
+		}
+		
+		svg text {
+			font-size: 12px;
+		}
+		
+		rect {
+			shape-rendering: crispEdges;
+		}
+	</style>
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+	<div style="width:100%; height: 60px;background-color: #505565;">
+		<p style="text-align: center;vertical-align:middle; width:100%; font-size: 27px;font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif; height:60px;line-height:60px;">Group Recommender Visualizaiton</p>
+	</div>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="js/GroupVis.js" ></script>
+	<script>
+		var raw_data = {
+			members: [{
+				name: 'Jack',
+				contribution: 1,
+				ratings: [
+					['P1', 5],
+					['P2', 4.2],
+				]
+			}, {
+				name: 'Teresa',
+				contribution: 1,
+				ratings: [
+					['P1', 3],
+					['P3', 3.5],
+				]
+			}],
+			neighbors: [{
+				name: 'Peter',
+				sim: 0,
+				ratings: [
+					['P1', 5],
+					['P2', 4.2],
+					['P4', 3.2],
+					['P5', 1.2],
+				]
+			}, {
+				name: 'Lily',
+				sim: 0,
+				ratings: [
+					['P1', 3],
+					['P3', 3.5],
+					['P4', 2.2],
+				]
+			}, {
+				name: 'Andy',
+				sim: 0,
+				ratings: [
+					['P2', 5],
+					['P4', 2.2],
+				]
+			}],
+			recs: {},
+			items: {}
+		};
+		var structual_data = [
+			[
+				['Jack', 5, [null], //0.31
+					[
+						['P1', 1],
+						['P2', 1],
+					]
+				],
+				['Teresa', 4.3, [null], //0.27
+					[
+						['P1', 1],
+						['P3', 1],
+					]
+				],
+				['Tom', 3, [null], //0.27
+					[
+						['P3', 1],
+					]
+				],
+				['Andy',2,[null],
+					[
+						['P2', 1],
+						['P4', 1]
+					]
+				]
+			],
+			[
+				['P1', 5.0, [
+						['Jack', 5],
+						['Teresa', 2.6],
+					],
+					[
+						['Neighbor1', 1],
+						['Neighbor2', 1],
+						['Neighbor3', 1],
+					]
+				],
+				['P2', 4.8, [
+						['Jack', 3.5],
+						['Andy',5]
+					],
+					[
+						['Neighbor1', 1],
+						['Neighbor2', 1],
+					]
+				],
+				['P3', 4.2, [
+						['Teresa', 2.6],
+						['Tom', 1.6]
+					],
+					[
+						['Neighbor1', 1],
+						['Neighbor3', 1],
+					]
+				],
+				['P4', 4.2, [
+						['Andy', 2.2],
+					],
+					[
+						['Neighbor2', 1],
+						['Neighbor3', 1],
+					]
+				],
+			],
+			[
+				['Neighbor1', 4.9, [
+						['P1', 3.4],
+						['P2', 1.5],
+						['P3', 1.5]
+					],
+					[
+						['M1', 5],
+						['M3', 3]
+					]
+				],
+				['Neighbor2', 3.6, [
+						['P1', 3.5],
+						['P2', 1.1]
+					],
+					[
+						['M2', 2],
+						['M4', 1]
+					]
+				],
+				['Neighbor3', 1.451, [
+						['P2', 3.1],
+						['P3', 1.41]
+					],
+					[
+						['M2', 2],
+						['M3', 1]
+					]
+				],
+
+			],
+			[
+				['R1', 5, [
+						['Neighbor1', 4.8],
+
+					],
+					[null]
+				],
+				['R2', 4.8, [
+
+						['Neighbor2', 4.2],
+						['Neighbor3', 1.2],
+
+					],
+					[null]
+				],
+				['R3', 4.43, [
+						['Neighbor1', 2.1],
+						['Neighbor3', 1.4],
+					],
+					[null]
+				],
+				['R4', 4.31, [
+						['Neighbor2', 1.9],
+					],
+					[null]
+				],
+
+			],
+		];
+
+		var width = 1400,
+			height = 1810,
+			margin = {
+				b: 0,
+				t: 40,
+				l: 170,
+				r: 50
+			};
+
+		var svg = d3.select("body")
+			.append("svg").attr('width', width).attr('height', (height + margin.b + margin.t))
+			.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
+
+		svg
+			.append("g").attr("transform", "translate(" + -178 + "," + 700 + ")")
+			.append("rect")
+			.attr("x", 10)
+			.attr("y", 10)
+			.attr("width", 145)
+			.attr("height", 170)
+			.attr("fill", "none")
+			.style("stroke", "#505565")
+			.style("stroke-width", "2")
+			.style("stroke-opacity", 0.8);
+
+
+		vis.draw(vis.getStructureData(structual_data), svg);
+	</script>
+
+</body>
