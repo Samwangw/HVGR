@@ -21,7 +21,7 @@
 
 <body>
 	<div style="width:100%; height: 60px;background-color: #505565;">
-		<p style="text-align: center;vertical-align:middle; width:100%; font-size: 27px;font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif; height:60px;line-height:60px;">Group Recommender Visualizaiton</p>
+		<p style="text-align: center;vertical-align:middle; width:100%; font-size: 27px;font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif; height:60px;line-height:60px;">THV for Group Recommender Systems</p>
 	</div>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script type="text/javascript" src="js/GroupVis.js" ></script>
@@ -207,19 +207,6 @@
 		var svg = d3.select("body")
 			.append("svg").attr('width', width).attr('height', (height + margin.b + margin.t))
 			.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
-
-		svg
-			.append("g").attr("transform", "translate(" + -178 + "," + 700 + ")")
-			.append("rect")
-			.attr("x", 10)
-			.attr("y", 10)
-			.attr("width", 145)
-			.attr("height", 170)
-			.attr("fill", "none")
-			.style("stroke", "#505565")
-			.style("stroke-width", "2")
-			.style("stroke-opacity", 0.8);
-
 
 		vis.draw(vis.getStructureData(structual_data), svg);
 	</script>
